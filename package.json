@@ -1,0 +1,24 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "json",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XJJGoing/JustReading-Server-.git"
+  },
+  "author": "XJJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XJJGoing/JustReading-Server-/issues"
+  },
+  "homepage": "https://github.com/XJJGoing/JustReading-Server-#readme"
+}

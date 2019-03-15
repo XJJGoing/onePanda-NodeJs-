@@ -5,17 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 
 //创建app服务器
-const app =express();
-
-//配置session
-app.use(session({
-    secret: 'my_session_secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie:{maxAge:10000,httpOnly:true},
-    rolling:true,
-}));
-
+const app = express();
 
 //设置加载openid的路由
 const router1 = require('./routers/openid');
@@ -29,6 +19,14 @@ app.use('/public/',express.static(path.join(__dirname,'./public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//配置session
+app.use(session({
+    secret: 'my_session_secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie:{maxAge:10000,httpOnly:true},
+    rolling:true,
+}));
 
 //这里是小贱贱
 //挂载路由文件12

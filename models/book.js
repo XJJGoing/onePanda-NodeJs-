@@ -1,9 +1,16 @@
 const mongoose = require('mongoose');
 require('../connect/connect.js');
 let BookSchema = mongoose.Schema({
+    _id: {
+        type:String,
+        require:true
+    },
     name:{
         type:String,
         require:true
+    },
+    url:{
+      type:String,
     },
     introduce:{
         type:String
@@ -12,7 +19,7 @@ let BookSchema = mongoose.Schema({
         type:String
     },
     Price:{
-        type:Number
+        type:String
     },
     //test1为选择题，test2为判断题，test3为解答题
     test1:[],

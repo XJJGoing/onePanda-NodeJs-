@@ -3,7 +3,7 @@ const userSchema = require('../models/user');
 const express = require('express');
 const router = express.Router();
 //获取微信小程序用户的openid以及session_key，从微信服务器
-router.post("/api/openid",async(req,res)=>{
+router.post("/login",async(req,res,next)=>{
     const Ut = require('../common/utils');
     try {
         console.log(req.body);
@@ -21,23 +21,39 @@ router.post("/api/openid",async(req,res)=>{
         let r1 = await Ut.promiseReq(opts);
         r1 = JSON.parse(r1);
         console.log(r1);
-        let { msg } = "查找失败或者用户已经存在";
+        let openid  = r1.openid;
         //将用户的openid存入数据库中
-        userSchema.findOne({_id:r1.openid},(err,user)=>{
+        userSchema.findOne({_id:openid},(err,user)=>{
             if(err||user){
-                //用户已经存在或者发生错误
-                res.json(msg)
+                console.log(openid);
+                //改变用户的登录状态
+                userSchema.updateOne({_id:openid},{$set:{isLiving:'1'}},(err,doc)=>{
+                    if (err){
+                        console.log("退出状态");
+                        next();
+                    }else{
+                        console.log(doc)
+                    }
+                });
+                res.json(openid);
+                console.log('错误或者用户已经存在');
             }else{
-                //console.log('我是插入部分');
-                userSchema.create({_id:r1.openid,name:data.nickName,gender:data.gender,avatarUrl:data.avatarUrl,adress: data.city}, (err,user)=>{
-                  if(err){
-                      console.log("插入用户失败")
-                  }
+                userSchema.create({_id:openid,
+                                   session_key:r1.session_key,
+                                   name:data.nickName,
+                                   gender:data.gender,
+                                   avatarUrl:data.avatarUrl,
+                                   adress: data.city,
+                                   isLiving:'1'
+                                   }, (err,doc)=>{
+                    if(err){
+                       console.log("插入用户失败");
+                        next();
+                     }
                   else{
-                      //插入成功并且返回session
                       console.log("插入用户成功");
-                      req.session.userinfo = '唯一的信息';
-                      res.json({t1:'登录成功'});
+                      console.log(doc);
+                      res.json(openid);
                   }
                 })
             }

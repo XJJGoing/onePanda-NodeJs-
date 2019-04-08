@@ -1,5 +1,10 @@
 require('../connect/connect');
+const mongoose = require('mongoose');
 let FeedBack = mongoose.Schema({
+    _id:{
+      type:Number,
+      require: true
+    },
     content:{
         type:String,
         require:true

@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 require('../connect/connect');
 let Test3Schema = mongoose.Schema({
+    _id: {
+        type:String,
+        require:true
+    },
     name:{
         type:String,
         require:true

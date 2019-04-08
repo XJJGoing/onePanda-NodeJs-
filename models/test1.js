@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 require('../connect/connect');
 //选择题目
 let Test1Schema = mongoose.Schema({
+    _id: {
+        type:String,
+        require:true
+    },
     name:{
       type:String,
       require: true
     },
-    options:[
+    option:[
         {A:{type:String},
         B:{type:String},
         C:{type:String},

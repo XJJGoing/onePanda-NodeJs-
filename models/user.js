@@ -21,14 +21,40 @@ let UserSchema = mongoose.Schema({
     number:{
           type:Number
     },
-    learn_time:{
-          type:Number
+    time:{
+          type:Number,
+          default: 0
     },
-    learn_day:{
-          type:Number
+    days:{
+          type:Number,
+          default:0
     },
     college:[],
     major:[],
+    //判断用户是否存在,0表示用户已经退出,1表示用户还存在
+    isLiving:{
+        type:String,
+        enum: ['0','1'],
+    },
+    create_time:{
+        type:Date,
+        default:Date.now
+    },
+    update_time:{
+      type:Date,
+    },
+    session_key:{
+      type:String,
+      require:true
+    },
+    connect_id: {
+        type: String,
+    },
+    //用户的打卡状态
+    status:{
+        type:Number,
+        default:1
+    },
 });
 
 let userSchema = mongoose.model('user',UserSchema);

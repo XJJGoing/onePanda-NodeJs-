@@ -1,0 +1,16 @@
+/*logo的css样式*/
+.site-logo{
+    border-radius: 50%;
+    -webkit-filter:blur(1px);
+}
+/*外交图片的CSS样式*/
+.my_img{
+   border: 1px dotted darkseagreen;
+    border-radius: 2%;
+}
+
+/*QQ二维码的样式*/
+.contact_QQ{
+    border-radius: 2%;
+    border: 1px dotted darkseagreen;
+}
